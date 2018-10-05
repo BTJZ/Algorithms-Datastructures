@@ -1,4 +1,4 @@
-// ¾ØÕó¿ìËÙÃİ 
+// çŸ©é˜µå¿«é€Ÿå¹‚ 
 void mul ()
 {
     int fa[105][105]={0};
@@ -24,7 +24,7 @@ void juzhen(ll a)
       a>>=1;
     }
 }
-// ´øÈ¨²¢²é¼¯
+// å¸¦æƒå¹¶æŸ¥é›†
  int find(int x)
   {
  	if(fa[x]!=x)
@@ -42,10 +42,10 @@ void merge(int x,int y)
   int y1=find(y);
   if(x1!=y1)
   fa[x1]=y1; 
-  rank[x1]=ÄãÒªµÄrankÖµ£» 
+  rank[x1]=ä½ è¦çš„rankå€¼ï¼› 
 } 
-// tarjin
-void tarjin(int t)
+// tarjan
+void tarjan(int t)
  {
     syc++;
     dfn[t]=syc,low[t]=syc;
@@ -54,7 +54,7 @@ void tarjin(int t)
      {
         if(!dfn[way[i].ed]) 
         {
-           tarjin(way[i].ed);
+           tarjan(way[i].ed);
            low[t]=min(low[t],low[way[i].ed]);
         }
         if(instack[way[i].ed])
@@ -74,7 +74,7 @@ void tarjin(int t)
         size--;
      } 
 }
-//Ç°×ººÍÓë²î·Ö 
+//å‰ç¼€å’Œä¸å·®åˆ† 
 void a()
  {
    int a[maxn],n,b[maxn];
