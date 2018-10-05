@@ -1,4 +1,8 @@
 // 矩阵快速幂 
+// 矩阵快速冪
+// 矩阵加速数列
+// 随机数生成器、
+// 1962 斐波那契数数列
 void mul ()
 {
     int fa[105][105]={0};
@@ -25,6 +29,7 @@ void juzhen(ll a)
     }
 }
 // 带权并查集
+// 银河英雄传说
  int find(int x)
   {
  	if(fa[x]!=x)
@@ -45,6 +50,9 @@ void merge(int x,int y)
   rank[x1]=你要的rank值； 
 } 
 // tarjan
+// 上白泽慧音
+// 抢掠计划
+// 受欢迎的牛
 void tarjan(int t)
  {
     syc++;
@@ -74,7 +82,8 @@ void tarjan(int t)
         size--;
      } 
 }
-//前缀和与差分 
+// 前缀和与差分 
+// 冰河峡谷（QZA）
 void a()
  {
    int a[maxn],n,b[maxn];
