@@ -4,7 +4,6 @@
 
 # 基础算法
 ## 排序
-### 快速排序
 ### 归并排序
 ```cpp
 int n,a[1100000],c[1100000];//a为待排序数组，c为中间数组，不要忘记开两倍
@@ -57,16 +56,43 @@ int main()
 ```
 ## 分治
 ### 二分法
-```cpp
-while(l < r) {
-    mid = (l + r) >> 1;
-    if(judge(mid)) r = mid;
-    else l = mid + 1;
-    }
-```
 ### 三分法
+```cpp
+double inline search(double l, double r) 
+{
+	double mid1, mid2;
+	while(r - l > eps) {
+		mid1 = (r - l) / 3 + l;
+		mid2 = r - (r - l) / 3;
+		if(f(mid1) > f(mid2)) r = mid2;
+		else l = mid1;
+	}
+	return l;
+}
+```
 ### 二分答案
+```cpp
+int inline Solve(int l, int r)
+{
+    int mid;
+    while(l < r) {
+        mid = (l + r) >> 1;
+        if(judge(mid)) r = mid;
+        else l = mid + 1;
+    }
+    return l;
+}
+```
 ### 快速冪
+
+```cpp
+ll power(ll a, ll b, int p) {
+    ll ans = 1;
+    for(; b; b >>= 1, a = a * a % p)
+        if(b & 1) ans = ans * a % p;
+    return ans;
+}
+```
 
 # 基础数据结构
 ## 堆 
@@ -78,11 +104,9 @@ while(l < r) {
 
 ### 例题
 
-1.P3378 模板题
-
-2.P1168 中位数
-
-3.P2672 推销员
+>[1.P3378 模板题]()
+>[2.P1168 中位数]()
+>[3.P2672 推销员]()
 
 下面是一个大根堆
 
@@ -123,6 +147,11 @@ priority_queue<int , vector<int> , greater<int> > q;
 ps:手敲的堆要比优先队列快好多
 
 ## 前缀和
+
+### 例题
+
+> [冰河峡谷（QZA）]()
+
 ```cpp
 void a()
  {
@@ -138,19 +167,11 @@ void a()
 ## DFS深度优先搜索
 **--------by chl**
 
-some very easy 例题
-
-
-{
-
-最经典的例题：
-[luogu P1219 八皇后](https://www.luogu.org/problemnew/show/P1219)
-[luogu P3958 奶酪](https://www.luogu.org/problemnew/show/P3958)
-
+### 例题：
+> [luogu P1219 八皇后](https://www.luogu.org/problemnew/show/P1219)
+> [luogu P3958 奶酪](https://www.luogu.org/problemnew/show/P3958)
 
 ~~事实上如果策略得当很多题都可以用DFS~~
-
-}
 
 算法概念：深度优先搜索（DFS），本质上是一种暴力枚举算法，通过生成所有可能的结果，并验证结果的正确性，来找到正解。
 
@@ -184,12 +205,13 @@ int main(void)
 ```
 ## BFS
 ## 记忆化搜索
-#### ------------by zzy
-#### 例题 
-1.[P3183 [HAOI2016]食物链](https://www.luogu.org/problemnew/show/P3183)
-2.[P1879 [USACO06NOV]玉米田Corn Fields](https://www.luogu.org/problemnew/show/P1879)
+**------------by zzy**
 
-**以下为核心代码**
+### 例题 
+>1.[P3183 [HAOI2016]食物链](https://www.luogu.org/problemnew/show/P3183)
+>2.[P1879 [USACO06NOV]玉米田Corn Fields](https://www.luogu.org/problemnew/show/P1879)
+
+以下为核心代码
 ```cpp
 int sum[maxn];
 dfs(int now){
@@ -200,7 +222,7 @@ dfs(int now){
 	return sum[now] = ans;
 }
 ```
-**玉米田的记忆化搜索解法**
+玉米田的记忆化搜索解法
 ```cpp
 int m, n, ans, MAX;
 int line[maxn];
@@ -290,13 +312,11 @@ if(j>=w[i]) f[j]=max(f[j]，f[j-w[i]]+v[i]); //状态转移
 ```
 ### 多重背包
 给定N件物品，每件物品的重量为wi，价值为vi，(1<=i<=N)，每件物品有ni件。现有一个最大载重为M的包，求在不超出包的最大载重的情况下，可以装下的物品总价值的最大值。
-
 这个问题高度类似于完全背包问题，只要加上个数的限制即可，状态转移方程为：
 
 ### 部分背包
 ### 分组背包
 给定N件物品，每件物品的重量为wi，价格为mi，价值为vi，(1<=i<=N)，且均有无穷多件。现有一个最大载重为M的包和E的钱，求在不超出包的最大载重的情况下，用仅有的钱可以买下并装下的物品总价值的最大值。
-
 二维或者多维条件的背包问题，均只需要在转移方程上面增加一维即可。例如在这个问题中，只需要在原有的完全背包问题上加上一维即可。状态转移方程为：
 ### 附带背包
 ## 状态压缩
@@ -322,11 +342,10 @@ int mat[2233][2233],n,m;//mat邻接矩阵
 ```
 ### 链式前向星
 ```cpp
-//前向星存图
 int first[100010],en;//first[i]表示以i为起点的第一条边的编号
 struct edge
 {
-    int to,w,nxt=0;//next会重名 
+    int to,w,nxt=0;//next会重名 	   
 }ed[200010];//结构体里面放边的信息，to为终点，w为权值，nxt为下条边的编号
 void add(int s,int e,int d)
 {
@@ -346,33 +365,6 @@ add(e,s,d);//双向边需加两次
 
 直接贴代码
 ```cpp
-#include<iostream>
-#include<queue>
-using namespace std;
-
-struct edge
-{
-	int zhongdian,changdu;
-	int next=0;
-};
-
-int first[2333];
-
-edge ed[23333];
-
-int n,m,en;
-
-void add_edge(int s,int e,int d)
-{
-	en++;
-	ed[en].next=first[s];
-	first[s]=en;
-	ed[en].zhongdian=e;
-	ed[en].changdu=d;
-}
-
-const int maxn=100010;
-const int INF=0x3f3f3f3f;
 int dist[maxn];
 bool use[maxn];
 
@@ -414,24 +406,19 @@ void dijkstra_heap()
 			}
 	}
 }
-
-int main()
-{
-	cin >> n >> m;
-	for (int a=1;a<=m;a++)
-	{
-		int s,e,d;
-		cin >> s >> e >> d;
-		add_edge(s,e,d);
-		add_edge(e,s,d);
-	}
-	dijkstra_heap(); 
-	
-	return 0;
-}
 ```
 
 ### SPFA
+
+syc 已经死了的spfa
+
+#### 例题
+
+> [1.洛谷 P3371]()
+> [2.T49370]()
+
+谁说是spfa死了的
+
 ```cpp
 void spfa(){
 	for(int i = 1 ; i <= n ; i++) d[i] = inf;
@@ -466,41 +453,37 @@ void floyd(){
 ```
 ## 最小生成树
 ### Kruskal 算法
->>**-----by CHL**
+**-----by CHL**
 
-  some very easy 例题 
-  
-  [luogu P3366 【模板】最小生成树 ](https://www.luogu.org/problemnew/show/P3366)
-  
-  [luogu P1967  货车运输](https://www.luogu.org/problemnew/show/P1967)
-  
-  [luogu P2504  聪明的猴子](https://www.luogu.org/problemnew/show/P12504)
-  
+#### 例题 
 
-  生成树： 一张具有n个点，n-1条边的联通图
-  最小生成树：即为最小权重生成树，指总边权最小的生成树
-  
-  生成最小生成树的算法：Kruskal 算法 && Prim 算法
-  
-  两种算法的比较：在稠密图中Prim算法较优，在稀疏图中Kruskal算法较优
-  
-  Kruskal算法
-  
-  1.算法思想：贪心
-  
-  2.算法基础： sort&&并查集
-  
-  3.算法步骤：
-  
-  （1）存入这张图
-   
-   (2) 按边权从小到大排序所有边
-   
-   (3) 从小到大地填边，把已填过的边合并为一个集合
-   
+>[1.luogu P3366 【模板】最小生成树 ](https://www.luogu.org/problemnew/show/P3366)
+>[2.luogu P1967  货车运输](https://www.luogu.org/problemnew/show/P1967)
+>[3.luogu P2504  聪明的猴子](https://www.luogu.org/problemnew/show/P12504)
+
+
+生成树： 一张具有n个点，n-1条边的联通图
+最小生成树：即为最小权重生成树，指总边权最小的生成树
+
+生成最小生成树的算法：Kruskal 算法 && Prim 算法
+
+两种算法的比较：在稠密图中Prim算法较优，在稀疏图中Kruskal算法较优
+
+Kruskal算法
+
+1.算法思想：贪心
+
+2.算法基础： sort&&并查集
+
+3.算法步骤：
+
+（1）存入这张图
+
+（2）按边权从小到大排序所有边
+
+（3）从小到大地填边，把已填过的边合并为一个集合
+
 贴代码
-
-
 
 ```cpp
 #include<cstdio>
@@ -509,9 +492,6 @@ void floyd(){
 const int maxn=200005;
 int m,n;
 int fa[maxn],ans,sum;    //ans存最小生成树总权值,sum存已加入的边数
-
-
-
 
 struct Edge
 {
@@ -541,8 +521,6 @@ void Kruskal()
 	}
 }
 
-
-
 int main(void)
 {
 	
@@ -571,33 +549,6 @@ int main(void)
 
 还是直接贴代码
 ```cpp
-#include<iostream>
-#include<queue>
-using namespace std;
-
-struct edge
-{
-	int zhongdian,changdu;
-	int next=0;
-};
-
-int first[2333];
-
-edge ed[23333];
-
-int n,m,en;
-
-void add_edge(int s,int e,int d)
-{
-	en++;
-	ed[en].next=first[s];
-	first[s]=en;
-	ed[en].zhongdian=e;
-	ed[en].changdu=d;
-}
-
-const int maxn=100010;
-const int INF=0x3f3f3f3f;
 int dist[maxn];
 bool use[maxn];
 
@@ -639,21 +590,6 @@ void prim_heap()
 			}
 	}
 }
-
-int main()
-{
-	cin >> n >> m;
-	for (int a=1;a<=m;a++)
-	{
-		int s,e,d;
-		cin >> s >> e >> d;
-		add_edge(s,e,d);
-		add_edge(e,s,d);
-	}
-	prim_heap(); 
-	
-	return 0;
-}
 ```
 ## 二分图
 ## 树链剖分
@@ -688,10 +624,17 @@ void dfs2(int u, int pa)
 }
 ```
 ## LCA
+
+### 例题
+
+> [1.Luogu P3379]()
+
 ### RMQ
 ### 树上倍增
-```cpp
 
+syc LCA
+
+```cpp
 int lca(int x,int y){
     int mmin = inf;
     if(deep[x]<deep[y]) swap(x,y);
@@ -715,6 +658,15 @@ int lca(int x,int y){
 ```
 ### Tarjan
 ## 有向图强联通分量
+
+### 例题
+
+> [上白泽慧音]()
+>
+> [抢掠计划]()
+>
+> [受欢迎的牛]()
+
 ```cpp
 void tarjan(int t)
  {
@@ -747,13 +699,14 @@ void tarjan(int t)
 }
 ```
 ## 拓扑排序
-####------------by zzy
-#### 例题 
+**------------by zzy**
+
+### 例题 
 >1.[P1038 神经网络](https://www.luogu.org/problemnew/show/P1038)
 >2.[P2661 信息传递](https://www.luogu.org/problemnew/show/P2661)
 >3.[zzy loves SB（神犇）](https://www.luogu.org/problemnew/show/T46473)
 
-**以下为核心代码**
+以下为核心代码
 ```cpp
 int in[maxn];//点的入度
 queue<int> q;
@@ -775,13 +728,14 @@ void toposort(){
 # 高级数据结构
 ## 蛤希
 ## 树状数组
-#### ------------by zzy
-#### 例题 
+**------------by zzy**
+
+### 例题 
 >1.[P3374 模板1](https://www.luogu.org/problemnew/show/P3374)
 >2.[P3368 模板2](https://www.luogu.org/problemnew/show/P3368)
 >3.[P1908 逆序对](https://www.luogu.org/problemnew/show/P1908)
 
-**以下为核心代码**
+以下为核心代码
 ```cpp
 int n, m;
 int tree[maxn];//树状数组
@@ -853,17 +807,19 @@ void Build(int id, int l, int r) {
 }
 ```
 ## ZKW线段树
-##zkw(lbw)线段树
-####------------by zzy
-**lbw线段树是一种极其极其极其实用的**~~简单~~**数据结构**
-####例题 
+
+**------------by zzy**
+
+**zkw线段树是一种极其极其极其实用的**~~简单~~**数据结构**
+
+### 例题 
 >1.[P3374 模板1](https://www.luogu.org/problemnew/show/P3374)
 >2.[P3368 模板2](https://www.luogu.org/problemnew/show/P3368)
 >3.[P3372 模板3](https://www.luogu.org/problemnew/show/P3372)
 >4.[P3865 模板4](https://www.luogu.org/problemnew/show/P3865)
 >5.[P3369 模板5](https://www.luogu.org/problemnew/show/P3369)
 
-####核心代码
+### 核心代码
 **1.单点修改，区间查询**
 ```cpp
 #include <iostream>
@@ -1023,7 +979,7 @@ int main(){
     return 0;
 }
 ```
-**3.区间修改，区间最大值查询**
+**3.区间最大值查询**
 ```cpp
 #include <iostream>
 #include <cstdio>
@@ -1087,66 +1043,6 @@ void solve(){
     while(m--){
     	a = read(); b = read();
     	print(query(a, b)); ent;
-    }
-    return;
-}
-
-int main(){
-    init();
-    solve();
-    return 0;
-}
-```
-**4.代替平衡树**
-```cpp
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-#include <algorithm>
-#define maxn 100005
-#define INF 0x3f3f3f3f
-#define ll long long
-#define ent putchar('\n')
-#define REP(i,x,y) for(register int i = x; i <= y; ++i)
-#define rep(i,x,y) for(register int i = x; i >= y; --i)
-using namespace std;
-
-inline int read(){
-    int x = 0, f = 1; char s = getchar();
-    while(s < '0'||s > '9') {if(s == '-') f = -1; s = getchar();}
-    while(s >= '0'&&s <= '9') {x = x * 10 + s -'0'; s = getchar();}
-    return x * f;
-}
-
-template<class T> inline T print(T x){
-    if(x < 0) {putchar('-'); x = -x;}
-    if(x > 9) print(x / 10);
-    putchar(x % 10 + '0');
-}
-
-int n, m;
-int lg[maxn], MAX[20][maxn];
-
-int query(int l, int r){
-    int k = lg[r - l + 1] - 1;
-    return max(MAX[k][l], MAX[k][r - (1 << k) + 1]);
-}
-
-inline void init(){
-    n = read(), m = read();
-    REP(i, 1, n) lg[i] = lg[i - 1] + (1 << lg[i - 1] == i);
-    REP(i, 1, n) MAX[0][i] = read();
-}
-
-inline void solve(){
-    rep(i, n, 1) for(register int j = 1; 1 << j <= n - i + 1; ++j)
-      MAX[j][i] = max(MAX[j - 1][i], MAX[j - 1][i + (1 << (j - 1))]);
-    int l, r;
-    while(m--){
-        l = read(), r = read();
-        print(query(l, r)), ent;
     }
     return;
 }
@@ -1298,18 +1194,13 @@ int main(){
 
 some very easy 例题
 
- [luogu P3367  【模板】并查集 ](https://www.luogu.org/problemnew/show/P3367)
-  
-  [luogu P1551   亲戚](https://www.luogu.org/problemnew/show/P1551)
-  
-  [luogu P3958   奶酪](https://www.luogu.org/problemnew/show/P3958)
-  
-  [luogu P1525   关押罪犯](https://www.luogu.org/problemnew/show/P1525)
-  
-  [luogu P1196   银河英雄传说  (@达哥）](https://www.luogu.org/problemnew/show/P1196)  
-  
-  [luogu P2024   食物链](https://www.luogu.org/problemnew/show/P2024)
-  
+>[luogu P3367  【模板】并查集 ](https://www.luogu.org/problemnew/show/P3367)
+>[luogu P1551   亲戚](https://www.luogu.org/problemnew/show/P1551)
+>[luogu P3958   奶酪](https://www.luogu.org/problemnew/show/P3958)
+>[luogu P1525   关押罪犯](https://www.luogu.org/problemnew/show/P1525)
+>[luogu P1196   银河英雄传说  (@达哥）](https://www.luogu.org/problemnew/show/P1196)  
+>[luogu P2024   食物链](https://www.luogu.org/problemnew/show/P2024)
+
 直接贴代码
 
 ```cpp
@@ -1330,7 +1221,7 @@ int find(int v) //查询根节点
 	}
 } /*
   	事实上，我们并不关心一个节点的父亲节点是谁，只需要关心它是否在一个集合中
-	==> 路径压缩优化
+	==> 路径压缩优化   
 */
 
 int find(int v)
@@ -1351,7 +1242,7 @@ void merge(int x,int y) //合并操作
 	int t1=find(x) ,t2=find(y); //找到需要合并的两个节点的根节点 
 	if(t1!=t2) // 若不在一个集合中 
 			   fa[t2]=t1;  //合并
-	return ;
+	return ;   
 }
 /*
   	关于某种名为启发式合并（按秩合并）的正统优化
@@ -1395,6 +1286,11 @@ int main(void)
 }
 ```
 ## 带权并查集
+
+### 例题
+
+> [银河英雄传说]()
+
 ```cpp
  int find(int x)
   {
@@ -1417,7 +1313,19 @@ void merge(int x,int y)
 } 
 ```
 ## ST表
+
+syc 区间RMQ最大值
+
+### 例题
+
+> [Luogu P3865]()
+
+提示:
+数据过大不要用cin
+cout 也不能用
+
 ```cpp
+
 void make(){
 	bit[0] = 1; for(int i = 1 ; i <= 24 ; i++) bit[i] = bit[i-1] * 2;
 	for(int i = 2 ; i <= n ; i++) lg[i] = lg[i>>1] + 1;
@@ -1435,6 +1343,7 @@ void find(){
 ```
 
 # 数学
+
 ## 唯一分解定理
 ## gcd
 ### exgcd
@@ -1451,6 +1360,11 @@ void ex_gcd(int a,int b,int &x,int &y){
 }
 ```
 ### 逆元
+
+syc 线性求逆元  高效求单个数逆元使用Ex_gcd 
+
+>[P3811]()
+
 ```cpp
 long long  n,p;
 
@@ -1469,19 +1383,71 @@ int main(){
 }
 ```
 ## 线性筛
+
+syc 欧拉筛法 
+>[P3383]() 
+
 ```cpp
-    flag[1] = 1;
-    for(int i = 2 ; i <= n ; i++){
-        if(!flag[i]) prime[++cnt] = i;
-        for(int j = 1 ; j <= cnt && prime[j]*i <= n ; j++){
-            flag[i*prime[j]] = 1;
-            if(i%prime[j]==0) break;
-        }
+flag[1] = 1;
+for(int i = 2 ; i <= n ; i++){
+	if(!flag[i]) prime[++cnt] = i;
+    for(int j = 1 ; j <= cnt && prime[j]*i <= n ; j++){
+        flag[i*prime[j]] = 1;
+        if(i%prime[j]==0) break;
+    }
 }
 ```
 ## 中国剩余定理
 ## 高斯消元
+
+```cpp
+int n;
+double A[maxn + 1][maxn] = {0};
+
+void Gauss()
+{
+    int i, j, k, r;
+    for(i = 0; i < n; ++i)
+    {
+        r = i;
+        for(j = i + 1; j < n; ++j)
+            if(fabs(A[j][i]) > fabs(A[r][i])) r = j;
+        if(r != i) for(j = 0; j <= n; ++j) swap(A[r][j], A[i][j]);
+        
+        for(j = n; j >= i; --j) {
+            for(k = i + 1; k < n; ++k)
+                A[k][j] -= A[k][i] / A[i][i] * A[i][j];
+        }
+    }
+    for(i = n - 1; i >= 0; --i) {
+        for(j = i + 1; j < n; ++j)
+            A[i][n] -= A[j][n] * A[i][j];
+        A[i][n] /= A[i][i];
+    }
+}
+```
+
+另外，需要判断无解的情况
+
+```cpp
+for(int i = 0; i < n; ++i) if(A[i][n] != A[i][n]) {
+    cout << "No Solution\n";
+    return;
+}
+```
+
 ## 矩阵乘法/矩阵快速冪
+
+### 例题
+
+> [矩阵快速冪]()
+>
+> [矩阵加速数列]()
+>
+> [随机数生成器]()
+>
+> [1962 斐波那契数数列]()
+
 ```cpp
 void mul ()
 {
@@ -1510,11 +1476,20 @@ void juzhen(ll a)
 }
 ```
 ## 排列组合
-### 杨辉三角
+### 杨辉三角（组合数）
+
+#### 组合数公式
+
+#### 递推公式
+
 ### 二项式定理
+
+
 
 # 模拟
 ## 高精度
+
+
 
 # STL
 ## 容器
@@ -1566,4 +1541,3 @@ sort(px+1,px+maxn+1,cmp);//cmp即为排序方式
 int itv[maxn], cnt;
 int inline vti(int v) { return lower_bound(itv, itv + cnt, v) - itv; }
 ```
-
