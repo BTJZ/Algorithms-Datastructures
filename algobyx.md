@@ -278,7 +278,42 @@ int main(){
 ## 最长上升子序列
 
 ```c++
+int len=1,a1[maxn],a2[maxn];//注意len初值1；
 
+ 
+for(int i=1;i<=n;++i)//最长上升 
+{
+	if(a1[i]>a2[len])//<-----------------------------
+	a2[++len]=a1[i]; //                             |
+	else             //                             |
+	a2[lower_bound(a2+1,a2+len+1,a1[i])-a2]=a1[i];//不能相等用lower； 
+}
+
+for(int i=1;i<=n;++i)//最长下降 
+{
+	if(a1[i]<a2[len])//<-------------------------------------------
+	a2[++len]=a1[i]; //                                           |
+	else             //                                           |
+	a2[lower_bound(a2+1,a2+len+1,a1[i],greater<int>)-a2]=a1[i];//不能相等用lower； 
+}                                    //    ^递减要加greater 
+
+for(int i=1;i<=n;++i)//最长不下降 
+{
+	if(a1[i]>=a2[len])//<------------------------------
+	a2[++len]=a1[i];  //                              |
+	else              //                              |
+	a2[upper_bound(a2+1,a2+len+1,a1[i])-a2]=a1[i];//能相等用upper； 
+}
+
+for(int i=1;i<=n;++i)//最长不上升 
+{
+	if(a1[i]<=a2[len])//<------------------------------------------
+	a2[++len]=a1[i];  //                                          |
+	else              //                                          |
+	a2[upper_bound(a2+1,a2+len+1,a1[i],greater<int>)-a2]=a1[i];//能相等用upper； 
+}                                    //    ^递减要加greater
+ 
+cout<<len; //轻松结果get 
 ```
 
 
@@ -1356,6 +1391,18 @@ void find(){
 
 ## 唯一分解定理
 ## gcd
+
+```c++
+int gcd(int a,int b)
+{
+    if(b==0)
+        return a;
+    gcd(b,a%b);
+}
+```
+
+
+
 ### exgcd
 ```cpp
 void ex_gcd(int a,int b,int &x,int &y){
